@@ -21,6 +21,9 @@ export default function SignUpScreen() {
       await signUp.create({
         emailAddress,
         password,
+        unsafeMetadata: {
+          accountType: "customer",
+        },
       });
 
       await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
