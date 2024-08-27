@@ -49,7 +49,7 @@ const PwReset = () => {
         <>
           <TextInput
             autoCapitalize="none"
-            placeholder="simon@galaxies.dev"
+            placeholder="example@example.com"
             value={emailAddress}
             onChangeText={setEmailAddress}
             style={styles.inputField}

@@ -19,6 +19,9 @@ export default function Page() {
         <Link href="/sign-up">
           <Text>Sign Up</Text>
         </Link>
+        <Link href="/reset">
+          <Text>Forget Password</Text>
+        </Link>
       </SignedOut>
     </View>
   );
