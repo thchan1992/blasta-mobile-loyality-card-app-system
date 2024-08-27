@@ -1,11 +1,49 @@
-import { ActivityIndicator, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { SignedIn, SignedOut, useUser } from "@clerk/clerk-expo";
+import { Link } from "expo-router";
+import { Text, View } from "react-native";
+import QRCode from "react-native-qrcode-svg";
+import * as SecureStore from "expo-secure-store";
 
-const StartPage = () => {
+export default function Page() {
+  const { user } = useUser();
+  const [userId, setUserId] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    async function getValue() {
+      try {
+        const result = await SecureStore.getItemAsync("userId");
+        if (result) {
+          setUserId(result);
+        } else {
+          alert("No values stored under that key.");
+        }
+      } catch (error) {
+        console.error("Error fetching secure store value", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    getValue();
+  }, []);
+
+  const qrCodeValue = userId || (user ? user.id : "");
+
   return (
-    <View style={{ flex: 1, justifyContent: "center" }}>
-      <ActivityIndicator size="large" color="#0000ff" />
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <SignedIn>
+        {!isLoading && qrCodeValue ? (
+          <View>
+            <Text>QR Code</Text>
+            <QRCode value={qrCodeValue} size={200} />
+          </View>
+        ) : (
+          <View>
+            <Text>No QR code is found, please sign in again</Text>
+          </View>
+        )}
+      </SignedIn>
     </View>
   );
-};
-
-export default StartPage;
+}
