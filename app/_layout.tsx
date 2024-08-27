@@ -44,5 +44,4 @@ function RootLayoutNav() {
     </ClerkProvider>
   );
 }
-
 export default RootLayoutNav;

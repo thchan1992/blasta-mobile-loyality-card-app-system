@@ -8,7 +8,9 @@ export default function Page() {
   const { signOut } = useClerk();
   return (
     <View>
-      <Text>Shops</Text>
+      <SignedIn>
+        <Text>Shops</Text>
+      </SignedIn>
     </View>
   );
 }

@@ -2,7 +2,11 @@ import { useSignIn } from "@clerk/clerk-expo";
 import { Link, useRouter } from "expo-router";
 import { Text, TextInput, Button, View } from "react-native";
 import React from "react";
+import * as SecureStore from "expo-secure-store";
 
+async function save(value: string) {
+  await SecureStore.setItemAsync("userId", value);
+}
 export default function Page() {
   const { signIn, setActive, isLoaded } = useSignIn();
   const router = useRouter();
@@ -24,6 +28,7 @@ export default function Page() {
       if (signInAttempt.status === "complete") {
         await setActive({ session: signInAttempt.createdSessionId });
         router.replace("/");
+        save(signInAttempt.id!);
       } else {
         // See https://clerk.com/docs/custom-flows/error-handling
         // for more info on error handling
