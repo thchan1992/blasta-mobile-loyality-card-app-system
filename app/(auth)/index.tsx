@@ -8,9 +8,9 @@ export default function Page() {
 
   return (
     <View>
-      <SignedIn>
+      {/* <SignedIn>
         <Text>Hello {user?.emailAddresses[0].emailAddress}</Text>
-      </SignedIn>
+      </SignedIn> */}
       <SignedOut>
         <Link href="/sign-in">
           <Text>Sign In</Text>
