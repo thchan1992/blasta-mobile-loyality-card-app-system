@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SignedIn, SignedOut, useUser } from "@clerk/clerk-expo";
+import { SignedIn, SignedOut, useAuth, useUser } from "@clerk/clerk-expo";
 import { Link } from "expo-router";
 import { Text, View } from "react-native";
 import QRCode from "react-native-qrcode-svg";
@@ -15,17 +15,20 @@ export default function Page() {
       try {
         const result = await SecureStore.getItemAsync("userId");
         if (result) {
+          //getting the userId from local storage
           setUserId(result);
         } else {
-          alert("No values stored under that key.");
+          //setting the userId to local storage
+          await SecureStore.setItemAsync("userId", user!.id!);
+          setUserId(user!.id!);
         }
       } catch (error) {
         console.error("Error fetching secure store value", error);
-      } finally {
-        setIsLoading(false);
+        return false;
       }
     }
     getValue();
+    setIsLoading(false);
   }, []);
 
   const qrCodeValue = userId || (user ? user.id : "");
