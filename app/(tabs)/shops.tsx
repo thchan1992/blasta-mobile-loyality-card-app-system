@@ -12,13 +12,14 @@ import axios from "axios";
 export default function Page() {
   const { getToken } = useAuth();
   const [customerData, setCustomerData] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState<Boolean>(true);
 
   useEffect(() => {
     const fetchCustomerData = async () => {
       try {
         const token = await getToken();
         const response = await axios.get(
-          "http://localhost:3000/api/customer/view",
+          "https://blasto-red.vercel.app/api/customer/view",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -33,21 +34,28 @@ export default function Page() {
     };
 
     fetchCustomerData();
+    setIsLoading(false);
   }, []);
 
   return (
     <View>
       <SignedIn>
-        <View>
-          {customerData.map((item) => {
-            return (
-              <View key={item._id}>
-                <Text>Name: {item.businessId.name}</Text>
-                <Text>Count: {item.count}</Text>
-              </View>
-            );
-          })}
-        </View>
+        {isLoading === false ? (
+          <View>
+            {customerData.map((item) => {
+              return (
+                <View key={item._id}>
+                  <Text>Name: {item.businessId.name}</Text>
+                  <Text>Count: {item.count}</Text>
+                </View>
+              );
+            })}
+          </View>
+        ) : (
+          <View>
+            <Text>Loading...</Text>
+          </View>
+        )}
         <Text>Shops</Text>
       </SignedIn>
     </View>
