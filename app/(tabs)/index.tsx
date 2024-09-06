@@ -51,7 +51,7 @@ export default function Page() {
           {!isLoading && qrCodeValue ? (
             <View>
               <View style={styles.title}>
-                <Text style={styles.titleText}> Scan your Blasta Code </Text>
+                <Text style={styles.titleText}> Scan your Code </Text>
               </View>
               <View style={styles.qrCodeContainer}>
                 <QRCode value={qrCodeValue} size={200} />
@@ -81,9 +81,13 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: "white",
     borderColor: "white",
+    shadowColor: "black",
+    shadowRadius: 5,
+    shadowOpacity: 1,
   },
   title: { justifyContent: "center", alignItems: "center", padding: 10 },
   titleText: {
+    fontWeight: "bold",
     textAlign: "center",
     textTransform: "capitalize",
     color: fourthColor,
