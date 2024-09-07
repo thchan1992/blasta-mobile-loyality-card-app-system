@@ -98,8 +98,20 @@ export default function Page() {
               </View>
             </ScrollView>
           ) : (
-            <View>
-              <Text>Loading...</Text>
+            <View
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                flex: 1,
+              }}
+            >
+              <Text>
+                Loading... Lorem ipsum dolor sit amet consectetur adipisicing
+                elit. Placeat exercitationem id tempora officia! Animi
+                praesentium eaque temporibus quasi doloribus. At placeat ipsum
+                aut distinctio nostrum rerum voluptates doloremque! Porro,
+                sapiente.
+              </Text>
             </View>
           )}
         </SignedIn>
