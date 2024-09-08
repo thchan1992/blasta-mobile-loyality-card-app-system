@@ -2,19 +2,27 @@ import React from "react";
 import { SignedIn, SignedOut, useUser, useClerk } from "@clerk/clerk-expo";
 import { Link } from "expo-router";
 import { Text, View, Button } from "react-native";
-import { fourthColor, primaryColor, thirdColor } from "../util/color";
+import {
+  fourthColor,
+  primaryColor,
+  secondaryColor,
+  thirdColor,
+} from "../util/color";
 import { TouchableOpacity } from "react-native-gesture-handler";
-
+import { LinearGradient } from "expo-linear-gradient";
+import { getScreenHeight, getScreenWidth } from "../util/dimensions";
 export default function Page() {
   const { user } = useUser();
 
   return (
-    <View
+    <LinearGradient
+      colors={[secondaryColor, primaryColor]}
       style={{
         justifyContent: "center",
         alignItems: "center",
         flex: 1,
         borderWidth: 1,
+        width: "100%",
       }}
     >
       {/* <SignedIn>
@@ -25,66 +33,85 @@ export default function Page() {
           style={{
             justifyContent: "center",
             alignItems: "center",
-            flex: 0.5,
-            borderWidth: 1,
-            width: "70%",
+            height: getScreenHeight() * 0.7,
+
+            width: getScreenWidth() * 0.7,
             borderRadius: 10,
-            shadowColor: "grey",
+            shadowColor: "black",
             shadowOpacity: 50,
             shadowRadius: 3,
             backgroundColor: thirdColor,
             borderColor: "grey",
           }}
         >
-          <Link href="/sign-in">
-            <TouchableOpacity
-              style={{
-                backgroundColor: fourthColor,
-                borderRadius: 10,
-                width: "100%",
-                padding: 10,
-                margin: 10,
-              }}
-            >
-              <View style={{ width: "100%", alignItems: "center" }}>
-                <Text style={{ fontWeight: "bold", textAlign: "center" }}>
-                  Sign In
-                </Text>
-              </View>
-            </TouchableOpacity>
-          </Link>
-          {/* <View style={{ width: "100%", alignItems: "center" }}> */}
-          <Link
-            href="/sign-up"
-            // style={{
-            //   width: "100%",
-            //   alignItems: "center",
-            //   justifyContent: "center",
-            // }}
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
-            <TouchableOpacity
+            <Link
+              href="/sign-in"
               style={{
-                backgroundColor: fourthColor,
-                borderRadius: 10,
-                width: "100%",
-                padding: 10,
-                margin: 10,
+                height: "70%",
+                width: "50%",
               }}
             >
-              <Text style={{ fontWeight: "bold", textAlign: "center" }}>
-                Sign Up
-              </Text>
-            </TouchableOpacity>
-          </Link>
-          {/* </View> */}
-
-          <TouchableOpacity>
-            <Link href="/reset" style={{ padding: 10 }}>
-              <Text style={{ fontWeight: "bold" }}>Forget Password</Text>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: fourthColor,
+                  borderRadius: 10,
+                  width: getScreenWidth() * 0.5,
+                  height: "100%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <View
+                  style={{
+                    width: "100%",
+                  }}
+                >
+                  <Text style={{ fontWeight: "bold", textAlign: "center" }}>
+                    Sign In
+                  </Text>
+                </View>
+              </TouchableOpacity>
             </Link>
-          </TouchableOpacity>
+          </View>
+          <View style={{ flex: 1 }}>
+            <Link
+              href="/sign-up"
+              style={{
+                height: "70%",
+                width: "50%",
+              }}
+            >
+              <TouchableOpacity
+                style={{
+                  backgroundColor: fourthColor,
+                  borderRadius: 10,
+                  width: getScreenWidth() * 0.5,
+                  height: "100%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Text style={{ fontWeight: "bold", textAlign: "center" }}>
+                  Sign Up
+                </Text>
+              </TouchableOpacity>
+            </Link>
+          </View>
+          {/* </View> */}
+          <View style={{ flex: 1 }}>
+            <Link href="/reset">
+              <TouchableOpacity>
+                <Text style={{ fontWeight: "bold", marginTop: 10 }}>
+                  Forget Password
+                </Text>
+              </TouchableOpacity>
+            </Link>
+          </View>
         </View>
       </SignedOut>
-    </View>
+    </LinearGradient>
   );
 }
