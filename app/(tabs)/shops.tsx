@@ -16,7 +16,8 @@ import {
   thirdColor,
 } from "../util/color";
 import { LinearGradient } from "expo-linear-gradient";
-
+import { Image } from "expo-image";
+import { getScreenHeight } from "../util/dimensions";
 export default function Page() {
   const { getToken } = useAuth();
   const [customerData, setCustomerData] = useState<any[]>([]);
@@ -45,6 +46,9 @@ export default function Page() {
     setIsLoading(false);
   }, []);
 
+  const blurhash =
+    "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <LinearGradient
@@ -54,7 +58,7 @@ export default function Page() {
         <SignedIn>
           {isLoading === false ? (
             <ScrollView style={{ flex: 1, width: "100%" }}>
-              <View style={{ paddingTop: 20 }}>
+              <View style={{ paddingTop: 20, marginHorizontal: 10 }}>
                 {customerData.map((item) => {
                   return (
                     <View
@@ -67,6 +71,8 @@ export default function Page() {
                         shadowColor: "black",
                         shadowOpacity: 80,
                         shadowRadius: 5,
+                        flexDirection: "row",
+                        height: getScreenHeight() * 0.2,
                       }}
                       key={item._id}
                     >
@@ -85,12 +91,34 @@ export default function Page() {
                         </Text>
                         <Text>
                           <Text style={{ fontWeight: "bold" }}>Reward(s):</Text>{" "}
-                          {item.businessId.loyaltyProgram / item.count > 0
+                          {Math.round(
+                            item.count / item.businessId.loyaltyProgram
+                          ) > 0
                             ? Math.round(
-                                item.businessId.loyaltyProgram / item.count
+                                item.count / item.businessId.loyaltyProgram
                               )
                             : "No reward"}
                         </Text>
+                      </View>
+                      <View
+                        style={{
+                          justifyContent: "center",
+                          alignItems: "flex-end",
+                          flex: 1,
+                          padding: 10,
+                        }}
+                      >
+                        <Image
+                          style={{
+                            flex: 1,
+                            width: "100%",
+                            backgroundColor: "white",
+                          }}
+                          source={item.businessId.logo}
+                          placeholder={{ blurhash }}
+                          contentFit="cover"
+                          transition={1000}
+                        />
                       </View>
                     </View>
                   );
@@ -105,13 +133,7 @@ export default function Page() {
                 flex: 1,
               }}
             >
-              <Text>
-                Loading... Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. Placeat exercitationem id tempora officia! Animi
-                praesentium eaque temporibus quasi doloribus. At placeat ipsum
-                aut distinctio nostrum rerum voluptates doloremque! Porro,
-                sapiente.
-              </Text>
+              <Text>Loading...</Text>
             </View>
           )}
         </SignedIn>

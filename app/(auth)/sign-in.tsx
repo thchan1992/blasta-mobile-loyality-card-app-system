@@ -13,12 +13,14 @@ import {
 import { getScreenHeight, getScreenWidth } from "../util/dimensions";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { FormContainer } from "@/components/FormContainer";
+import { useState } from "react";
 export default function Page() {
   const { signIn, setActive, isLoaded } = useSignIn();
   const router = useRouter();
 
   const [emailAddress, setEmailAddress] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [warning, setWarning] = useState<string>("");
 
   const onSignInPress = React.useCallback(async () => {
     if (!isLoaded) {
@@ -40,7 +42,8 @@ export default function Page() {
         console.error(JSON.stringify(signInAttempt, null, 2));
       }
     } catch (err: any) {
-      console.error(JSON.stringify(err, null, 2));
+      setWarning("The email or password is not correct.");
+      // console.error(JSON.stringify(err, null, 2));
     }
   }, [isLoaded, emailAddress, password]);
 
@@ -116,6 +119,7 @@ export default function Page() {
                 <Text>Sign up</Text>
               </Link>
             </View>
+            <Text>{warning}</Text>
           </View>
         }
       />

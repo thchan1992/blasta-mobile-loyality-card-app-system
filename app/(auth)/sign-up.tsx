@@ -15,6 +15,7 @@ export default function SignUpScreen() {
   const [password, setPassword] = React.useState("");
   const [pendingVerification, setPendingVerification] = React.useState(false);
   const [code, setCode] = React.useState("");
+  const [warning, setWarning] = React.useState<string>("");
 
   const onSignUpPress = async () => {
     if (!isLoaded) {
@@ -36,7 +37,8 @@ export default function SignUpScreen() {
     } catch (err: any) {
       // See https://clerk.com/docs/custom-flows/error-handling
       // for more info on error handling
-      console.error(JSON.stringify(err, null, 2));
+      // console.error(JSON.stringify(err, null, 2));
+      setWarning("Email has been taken.");
     }
   };
 
@@ -44,7 +46,6 @@ export default function SignUpScreen() {
     if (!isLoaded) {
       return;
     }
-
     try {
       const completeSignUp = await signUp.attemptEmailAddressVerification({
         code,
@@ -54,7 +55,8 @@ export default function SignUpScreen() {
         await setActive({ session: completeSignUp.createdSessionId });
         router.replace("/");
       } else {
-        console.error(JSON.stringify(completeSignUp, null, 2));
+        // console.error(JSON.stringify(completeSignUp, null, 2));
+        setWarning("Verification code is not correct.");
       }
     } catch (err: any) {
       // See https://clerk.com/docs/custom-flows/error-handling
@@ -131,6 +133,7 @@ export default function SignUpScreen() {
                 >
                   <Text>Sign Up</Text>
                 </TouchableOpacity>
+                <Text>{warning}</Text>
               </>
             )}
             {pendingVerification && (
