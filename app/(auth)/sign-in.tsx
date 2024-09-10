@@ -136,6 +136,25 @@ export default function Page() {
           </Link>
         </View> */}
           <Text style={{ color: "red", paddingLeft: 15 }}>{warning}</Text>
+          <Link
+            href="/reset"
+            style={{
+              height: "70%",
+              width: "50%",
+            }}
+          >
+            <TouchableOpacity>
+              <Text
+                style={{
+                  fontWeight: "bold",
+                  textAlign: "center",
+                  paddingLeft: 15,
+                }}
+              >
+                Forgot password? Click here.
+              </Text>
+            </TouchableOpacity>
+          </Link>
         </View>
         <View
           style={{

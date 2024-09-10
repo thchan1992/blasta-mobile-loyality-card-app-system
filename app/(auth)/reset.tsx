@@ -2,6 +2,8 @@ import { View, StyleSheet, TextInput, Button } from "react-native";
 import React, { useState } from "react";
 import { Stack } from "expo-router";
 import { useSignIn } from "@clerk/clerk-expo";
+import { LinearGradient } from "expo-linear-gradient";
+import { primaryColor, secondaryColor } from "../util/color";
 
 const PwReset = () => {
   const [emailAddress, setEmailAddress] = useState("");
@@ -42,7 +44,10 @@ const PwReset = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={[secondaryColor, primaryColor]}
+      style={styles.container}
+    >
       <Stack.Screen options={{ headerBackVisible: !successfulCreation }} />
 
       {!successfulCreation && (
@@ -58,7 +63,7 @@ const PwReset = () => {
           <Button
             onPress={onRequestReset}
             title="Send Reset Email"
-            color={"#6c47ff"}
+            color={"black"}
           ></Button>
         </>
       )}
@@ -83,11 +88,11 @@ const PwReset = () => {
           <Button
             onPress={onReset}
             title="Set new Password"
-            color={"#6c47ff"}
+            color={"black"}
           ></Button>
         </>
       )}
-    </View>
+    </LinearGradient>
   );
 };
 
@@ -100,8 +105,8 @@ const styles = StyleSheet.create({
   inputField: {
     marginVertical: 4,
     height: 50,
-    borderWidth: 1,
-    borderColor: "#6c47ff",
+    // borderWidth: 1,
+    // borderColor: "#6c47ff",
     borderRadius: 4,
     padding: 10,
     backgroundColor: "#fff",

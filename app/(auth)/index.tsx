@@ -1,7 +1,7 @@
 import React from "react";
 import { SignedIn, SignedOut, useUser, useClerk } from "@clerk/clerk-expo";
 import { Link } from "expo-router";
-import { Text, View, Button } from "react-native";
+import { Text, View, Button, Platform } from "react-native";
 import {
   fourthColor,
   primaryColor,
@@ -43,15 +43,18 @@ export default function Page() {
             }}
           >
             <TouchableOpacity
-              style={{
-                backgroundColor: fourthColor,
-                borderRadius: 40,
-                width: getScreenWidth() * 0.9,
-                height: "100%",
-                justifyContent: "center",
-                alignItems: "center",
-                margin: 10,
-              }}
+              style={[
+                {
+                  backgroundColor: fourthColor,
+                  borderRadius: 40,
+                  width: getScreenWidth() * 0.9,
+                  height: "100%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  margin: 10,
+                },
+                Platform.OS === "android" && { padding: 10 },
+              ]}
             >
               <Text style={{ fontWeight: "bold", textAlign: "center" }}>
                 Get started

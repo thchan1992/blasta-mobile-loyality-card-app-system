@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { Text, View } from "react-native";
+import { Platform, Text, View } from "react-native";
 import { fourthColor, primaryColor, secondaryColor } from "../util/color";
 import { Link } from "expo-router";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -30,15 +30,18 @@ export default function Registration() {
           }}
         >
           <TouchableOpacity
-            style={{
-              backgroundColor: fourthColor,
-              borderRadius: 40,
-              width: getScreenWidth() * 0.9,
-              height: "95%",
-              justifyContent: "center",
-              alignItems: "center",
-              margin: 5,
-            }}
+            style={[
+              {
+                backgroundColor: fourthColor,
+                borderRadius: 40,
+                width: getScreenWidth() * 0.9,
+                height: "95%",
+                justifyContent: "center",
+                alignItems: "center",
+                margin: 5,
+              },
+              Platform.OS === "android" && { padding: 10 },
+            ]}
           >
             <Text style={{ fontWeight: "bold", textAlign: "center" }}>
               Sign Up
@@ -54,16 +57,19 @@ export default function Registration() {
           }}
         >
           <TouchableOpacity
-            style={{
-              backgroundColor: "grey",
-              borderRadius: 40,
-              width: getScreenWidth() * 0.9,
-              height: "95%",
-              justifyContent: "center",
-              alignItems: "center",
-              margin: 5,
-              borderWidth: 2,
-            }}
+            style={[
+              {
+                backgroundColor: "grey",
+                borderRadius: 40,
+                width: getScreenWidth() * 0.9,
+                height: "95%",
+                justifyContent: "center",
+                alignItems: "center",
+                margin: 5,
+                borderWidth: 2,
+              },
+              Platform.OS === "android" && { padding: 10 },
+            ]}
           >
             <Text style={{ fontWeight: "bold", textAlign: "center" }}>
               Sign In
