@@ -39,11 +39,11 @@ export default function Page() {
         setCustomerData(response.data.data.stamps);
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
-
     fetchCustomerData();
-    setIsLoading(false);
   }, []);
 
   const blurhash =
@@ -134,6 +134,11 @@ export default function Page() {
               }}
             >
               <Text>Loading...</Text>
+            </View>
+          )}
+          {customerData.length === 0 && (
+            <View>
+              <Text>No Stamp</Text>
             </View>
           )}
         </SignedIn>

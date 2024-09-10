@@ -36,22 +36,9 @@ export default function Page() {
       }}
     >
       <SignedIn>
-        {/* <Text>{!isLoading && "from the server:" + data}</Text> */}
         <Text style={{ fontWeight: "bold", color: "white" }}>
-          {" "}
           {user?.emailAddresses[0].emailAddress}
         </Text>
-        {/* <Button
-          // style={{}}
-          title="Sign Out"
-          onPress={async () => {
-            await signOut();
-            const res = await SecureStore.deleteItemAsync("userId");
-            console.log(res, " deleted ");
-            router.replace("/(auth)");
-          }}
-        /> */}
-
         <TouchableOpacity
           style={{
             borderRadius: 20,
