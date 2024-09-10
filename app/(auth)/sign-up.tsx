@@ -133,7 +133,7 @@ export default function SignUpScreen() {
                 style={{
                   // borderWidth: 1,
                   width: "95%",
-                  height: "10%",
+                  height: getScreenHeight() * 0.08,
                   margin: 10,
                   padding: 10,
                   borderRadius: 10,
@@ -149,7 +149,7 @@ export default function SignUpScreen() {
                 style={{
                   // borderWidth: 1,
                   width: "95%",
-                  height: "10%",
+                  height: getScreenHeight() * 0.08,
                   margin: 10,
                   padding: 10,
                   borderRadius: 10,
@@ -223,7 +223,7 @@ export default function SignUpScreen() {
                 style={{
                   borderWidth: 1,
                   width: "95%",
-                  height: "10%",
+                  height: getScreenHeight() * 0.08,
                   margin: 10,
                   padding: 10,
                   borderRadius: 10,
