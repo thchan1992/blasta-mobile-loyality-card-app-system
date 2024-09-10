@@ -48,7 +48,7 @@ const PwReset = () => {
       colors={[secondaryColor, primaryColor]}
       style={styles.container}
     >
-      <Stack.Screen options={{ headerBackVisible: !successfulCreation }} />
+      {/* <Stack.Screen options={{ headerBackVisible: !successfulCreation }} /> */}
 
       {!successfulCreation && (
         <>

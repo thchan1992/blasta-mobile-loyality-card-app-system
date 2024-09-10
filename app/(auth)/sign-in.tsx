@@ -1,6 +1,14 @@
 import { useSignIn } from "@clerk/clerk-expo";
 import { Link, useRouter } from "expo-router";
-import { Text, TextInput, Button, View, Image } from "react-native";
+import {
+  Text,
+  TextInput,
+  Button,
+  View,
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import {
@@ -100,8 +108,9 @@ export default function Page() {
           <TextInput
             style={{
               // borderWidth: 1,
+              marginVertical: 4,
               width: "95%",
-              height: "10%",
+              height: getScreenHeight() * 0.08,
               margin: 10,
               padding: 10,
               borderRadius: 10,
@@ -117,7 +126,7 @@ export default function Page() {
             style={{
               // borderWidth: 1,
               width: "95%",
-              height: "10%",
+              height: getScreenHeight() * 0.08,
               margin: 10,
               padding: 10,
               borderRadius: 10,
