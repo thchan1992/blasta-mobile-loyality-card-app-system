@@ -1,6 +1,6 @@
 import { useSignIn } from "@clerk/clerk-expo";
 import { Link, useRouter } from "expo-router";
-import { Text, TextInput, Button, View } from "react-native";
+import { Text, TextInput, Button, View, Image } from "react-native";
 import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import {
@@ -14,6 +14,7 @@ import { getScreenHeight, getScreenWidth } from "../util/dimensions";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { FormContainer } from "@/components/FormContainer";
 import { useState } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 export default function Page() {
   const { signIn, setActive, isLoaded } = useSignIn();
   const router = useRouter();
@@ -51,78 +52,115 @@ export default function Page() {
     <LinearGradient
       colors={[secondaryColor, primaryColor]}
       style={{
-        justifyContent: "center",
-        alignItems: "center",
         flex: 1,
-        borderWidth: 1,
-        width: "100%",
       }}
     >
-      <FormContainer
-        child={
-          <View
-            style={{
-              width: getScreenWidth() * 0.8,
-              height: getScreenHeight() * 0.5,
-              justifyContent: "center",
-              alignItems: "center",
+      <SafeAreaView
+        style={{
+          // justifyContent: "center",
+          alignItems: "center",
+          flex: 1,
+          borderWidth: 1,
+          width: "100%",
+        }}
+      >
+        <View
+          style={{
+            flex: 1,
+            borderBottomWidth: 2,
+            width: "100%",
+            justifyContent: "center",
+          }}
+        >
+          <TouchableOpacity
+            onPress={() => {
+              router.back();
             }}
           >
-            <TextInput
+            <Image
               style={{
-                borderWidth: 1,
-                width: "90%",
-                height: "10%",
-                margin: 10,
-                padding: 10,
-                borderRadius: 10,
-                backgroundColor: "white",
+                width: getScreenWidth() * 0.1,
+                height: getScreenHeight() * 0.1,
               }}
-              autoCapitalize="none"
-              value={emailAddress}
-              placeholder="Email..."
-              onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
+              source={require("@/assets/images/chevron-left.png")}
             />
-            <TextInput
-              style={{
-                borderWidth: 1,
-                width: "90%",
-                height: "10%",
-                margin: 10,
-                padding: 10,
-                borderRadius: 10,
-                backgroundColor: "white",
-              }}
-              value={password}
-              placeholder="Password..."
-              secureTextEntry={true}
-              onChangeText={(password) => setPassword(password)}
-            />
-            <TouchableOpacity
-              onPress={onSignInPress}
-              style={{
-                borderWidth: 1,
-                width: getScreenWidth() * 0.3,
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: fourthColor,
-                borderRadius: 5,
-                height: getScreenHeight() * 0.08,
-              }}
-            >
-              <Text>Sign In</Text>
-            </TouchableOpacity>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            width: "100%",
+            // width: getScreenWidth() * 0.8,
+            // height: getScreenHeight() * 0.5,
+            flex: 9,
+            // justifyContent: "center",
+            alignItems: "flex-start",
+          }}
+        >
+          <Text style={{ marginLeft: 15, marginTop: 15 }}>Email</Text>
+          <TextInput
+            style={{
+              // borderWidth: 1,
+              width: "95%",
+              height: "10%",
+              margin: 10,
+              padding: 10,
+              borderRadius: 10,
+              backgroundColor: "white",
+            }}
+            autoCapitalize="none"
+            value={emailAddress}
+            placeholder="Email..."
+            onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
+          />
+          <Text style={{ marginLeft: 15 }}>Password</Text>
+          <TextInput
+            style={{
+              // borderWidth: 1,
+              width: "95%",
+              height: "10%",
+              margin: 10,
+              padding: 10,
+              borderRadius: 10,
+              backgroundColor: "white",
+            }}
+            value={password}
+            placeholder="Password..."
+            secureTextEntry={true}
+            onChangeText={(password) => setPassword(password)}
+          />
 
-            <View style={{ padding: 10 }}>
-              <Text>Don't have an account?</Text>
-              <Link href="/sign-up" style={{ paddingHorizontal: 10 }}>
-                <Text>Sign up</Text>
-              </Link>
-            </View>
-            <Text>{warning}</Text>
-          </View>
-        }
-      />
+          {/* <View style={{ padding: 10 }}>
+          <Text>Don't have an account?</Text>
+          <Link href="/sign-up" style={{ paddingHorizontal: 10 }}>
+            <Text>Sign up</Text>
+          </Link>
+        </View> */}
+          <Text style={{ color: "red", paddingLeft: 15 }}>{warning}</Text>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            margin: 10,
+          }}
+        >
+          <TouchableOpacity
+            onPress={onSignInPress}
+            style={{
+              // borderWidth: 1,
+              width: getScreenWidth() * 0.9,
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: fourthColor,
+              borderRadius: 40,
+              height: getScreenHeight() * 0.08,
+            }}
+          >
+            <Text>Sign In</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
     </LinearGradient>
   );
 }
