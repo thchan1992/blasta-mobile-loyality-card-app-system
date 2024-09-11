@@ -50,11 +50,11 @@ export default function Page() {
     "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <LinearGradient
-        colors={[secondaryColor, primaryColor]}
-        style={styles.container}
-      >
+    <LinearGradient
+      colors={[secondaryColor, primaryColor]}
+      style={styles.container}
+    >
+      <SafeAreaView style={{ flex: 1 }}>
         <SignedIn>
           {isLoading === false ? (
             <ScrollView style={{ flex: 1, width: "100%" }}>
@@ -142,8 +142,8 @@ export default function Page() {
             </View>
           )}
         </SignedIn>
-      </LinearGradient>
-    </SafeAreaView>
+      </SafeAreaView>
+    </LinearGradient>
   );
 }
 
@@ -151,8 +151,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // justifyContent: "center",
-    alignItems: "center",
+    // alignItems: "center",
 
-    backgroundColor: primaryColor,
+    // backgroundColor: primaryColor,
   },
 });
