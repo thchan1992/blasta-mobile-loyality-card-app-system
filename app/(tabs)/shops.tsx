@@ -36,6 +36,18 @@ export default function Page() {
           }
         );
         console.log(response.data.data.stamps[0]);
+
+        // const dummy = [{
+        //   _id: "66d2f91fab7980fde2f0d666",
+        //   businessId: {
+        //     _id: "66d2f6cbab7980fde2f0d650",
+        //     logo: "https://gusto-ts.s3.eu-west-2.amazonaws.com/1725520776500-Screenshot 2024-08-27 at 19.22.32.png",
+        //     loyaltyProgram: 10,
+        //     name: "asjdlkjsakldjas",
+        //   },
+        //   count: 1,
+        // }];
+
         setCustomerData(response.data.data.stamps);
       } catch (error) {
         console.error("Error fetching data:", error);

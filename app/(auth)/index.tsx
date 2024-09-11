@@ -11,6 +11,7 @@ import {
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import { getScreenHeight, getScreenWidth } from "../util/dimensions";
+import { BigButton } from "@/components/BigButton";
 export default function Page() {
   const { user } = useUser();
 
@@ -35,32 +36,7 @@ export default function Page() {
             margin: 10,
           }}
         >
-          <Link
-            href="/registration"
-            style={{
-              height: "70%",
-              width: "50%",
-            }}
-          >
-            <TouchableOpacity
-              style={[
-                {
-                  backgroundColor: fourthColor,
-                  borderRadius: 40,
-                  width: getScreenWidth() * 0.9,
-                  height: "100%",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  margin: 10,
-                },
-                Platform.OS === "android" && { padding: 10 },
-              ]}
-            >
-              <Text style={{ fontWeight: "bold", textAlign: "center" }}>
-                Get started
-              </Text>
-            </TouchableOpacity>
-          </Link>
+          <BigButton link={"/registration"} title={"Get Started"} />
         </View>
       </SignedOut>
     </LinearGradient>
