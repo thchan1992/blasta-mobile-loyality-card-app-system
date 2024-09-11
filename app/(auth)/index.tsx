@@ -1,7 +1,7 @@
 import React from "react";
 import { SignedIn, SignedOut, useUser, useClerk } from "@clerk/clerk-expo";
 import { Link } from "expo-router";
-import { Text, View, Button, Platform } from "react-native";
+import { Text, View, Button, Platform, SafeAreaView } from "react-native";
 import {
   fourthColor,
   primaryColor,
@@ -16,9 +16,10 @@ export default function Page() {
   const { user } = useUser();
 
   return (
-    <LinearGradient
-      colors={[secondaryColor, primaryColor]}
+    <SafeAreaView
+      // colors={["black", "white"]}
       style={{
+        backgroundColor: "black",
         justifyContent: "center",
         alignItems: "center",
         flex: 1,
@@ -39,6 +40,6 @@ export default function Page() {
           <BigButton link={"/registration"} title={"Get Started"} />
         </View>
       </SignedOut>
-    </LinearGradient>
+    </SafeAreaView>
   );
 }

@@ -7,9 +7,11 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 export const BigButton = ({
   link,
   title,
+  customColor,
 }: {
   link: Href<string | object>;
   title: string;
+  customColor?: string;
 }) => {
   return (
     <Link
@@ -22,18 +24,32 @@ export const BigButton = ({
       <TouchableOpacity
         style={[
           {
-            backgroundColor: fourthColor,
+            backgroundColor: "#304FFE",
             borderRadius: 40,
             width: getScreenWidth() * 0.9,
-            height: "100%",
+            height: "80%",
             justifyContent: "center",
             alignItems: "center",
             margin: 10,
           },
           Platform.OS === "android" && { padding: 10 },
+          customColor
+            ? {
+                backgroundColor: customColor,
+                borderWidth: 1,
+                borderColor: "#a2abfe",
+              }
+            : undefined,
         ]}
       >
-        <Text style={{ fontWeight: "bold", textAlign: "center" }}>{title}</Text>
+        <Text
+          style={[
+            { fontWeight: "bold", textAlign: "center" },
+            customColor ? { color: "#a2abfe" } : undefined,
+          ]}
+        >
+          {title}
+        </Text>
       </TouchableOpacity>
     </Link>
   );

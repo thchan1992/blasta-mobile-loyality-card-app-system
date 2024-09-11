@@ -1,16 +1,18 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { Platform, Text, View } from "react-native";
+import { Platform, SafeAreaView, Text, View } from "react-native";
 import { fourthColor, primaryColor, secondaryColor } from "../util/color";
 import { Link } from "expo-router";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { getScreenWidth } from "../util/dimensions";
+import { BigButton } from "@/components/BigButton";
 
 export default function Registration() {
   return (
-    <LinearGradient
-      colors={[secondaryColor, primaryColor]}
+    <SafeAreaView
+      // colors={["black"]}
       style={{
+        backgroundColor: "black",
         justifyContent: "center",
         alignItems: "center",
         flex: 1,
@@ -18,11 +20,9 @@ export default function Registration() {
         width: "100%",
       }}
     >
-      <View style={{ flex: 3 }}>
-        <Text>Hello</Text>
-      </View>
-      <View style={{ flex: 1, margin: 10 }}>
-        <Link
+      <View style={{ flex: 5 }}></View>
+      <View style={{ flex: 1, marginBottom: 10, paddingBottom: 20 }}>
+        {/* <Link
           href="/sign-up"
           style={{
             height: "50%",
@@ -47,9 +47,11 @@ export default function Registration() {
               Sign Up
             </Text>
           </TouchableOpacity>
-        </Link>
+        </Link> */}
+        <BigButton link={"/sign-up"} title={"Sign up"} />
+        <BigButton link={"/sign-in"} title={"Sign in"} customColor="black" />
 
-        <Link
+        {/* <Link
           href="/sign-in"
           style={{
             height: "50%",
@@ -75,8 +77,8 @@ export default function Registration() {
               Sign In
             </Text>
           </TouchableOpacity>
-        </Link>
+        </Link> */}
       </View>
-    </LinearGradient>
+    </SafeAreaView>
   );
 }
