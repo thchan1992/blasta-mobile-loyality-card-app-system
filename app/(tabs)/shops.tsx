@@ -37,18 +37,21 @@ export default function Page() {
         );
         console.log(response.data.data.stamps[0]);
 
-        // const dummy = [{
-        //   _id: "66d2f91fab7980fde2f0d666",
-        //   businessId: {
-        //     _id: "66d2f6cbab7980fde2f0d650",
-        //     logo: "https://gusto-ts.s3.eu-west-2.amazonaws.com/1725520776500-Screenshot 2024-08-27 at 19.22.32.png",
-        //     loyaltyProgram: 10,
-        //     name: "asjdlkjsakldjas",
-        //   },
-        //   count: 1,
-        // }];
+        const dummy = [
+          {
+            _id: "66d2f91fab7980fde2f0d666",
+            businessId: {
+              _id: "66d2f6cbab7980fde2f0d650",
+              logo: "https://gusto-ts.s3.eu-west-2.amazonaws.com/1725520776500-Screenshot 2024-08-27 at 19.22.32.png",
+              loyaltyProgram: 10,
+              name: "asjdlkjsakldjas",
+            },
+            count: 1,
+          },
+        ];
 
-        setCustomerData(response.data.data.stamps);
+        setCustomerData(dummy);
+        // setCustomerData(response.data.data.stamps);
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -62,10 +65,7 @@ export default function Page() {
     "|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[";
 
   return (
-    <LinearGradient
-      colors={[secondaryColor, primaryColor]}
-      style={styles.container}
-    >
+    <View style={styles.container}>
       <SafeAreaView style={{ flex: 1 }}>
         <SignedIn>
           {isLoading === false ? (
@@ -78,7 +78,7 @@ export default function Page() {
                         padding: 5,
                         flex: 1,
                         margin: 5,
-                        backgroundColor: thirdColor,
+                        backgroundColor: secondaryColor,
                         borderRadius: 10,
                         shadowColor: "black",
                         shadowOpacity: 80,
@@ -140,28 +140,38 @@ export default function Page() {
           ) : (
             <View
               style={{
-                justifyContent: "center",
+                // justifyContent: "center",
                 alignItems: "center",
                 flex: 1,
               }}
             >
-              <Text>Loading...</Text>
+              <Text style={{ color: fourthColor, fontWeight: "bold" }}>
+                Loading...
+              </Text>
             </View>
           )}
           {customerData.length === 0 && (
-            <View>
-              <Text>No Stamp</Text>
+            <View
+              style={{
+                alignItems: "center",
+                flex: 1,
+              }}
+            >
+              <Text style={{ color: fourthColor, fontWeight: "bold" }}>
+                No Stamp(s)
+              </Text>
             </View>
           )}
         </SignedIn>
       </SafeAreaView>
-    </LinearGradient>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "black",
     // justifyContent: "center",
     // alignItems: "center",
 

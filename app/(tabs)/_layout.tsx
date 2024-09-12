@@ -1,12 +1,13 @@
 import { Tabs } from "expo-router/tabs";
 import { Image, View } from "react-native";
+import { fourthColor, primaryColor, secondaryColor } from "../util/color";
 
 export default function Layout() {
   return (
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: "white",
-        tabBarActiveBackgroundColor: "black",
+        tabBarActiveBackgroundColor: primaryColor,
         headerShown: false,
       }}
     >
