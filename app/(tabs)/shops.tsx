@@ -71,6 +71,7 @@ export default function Page() {
           {isLoading === false ? (
             <ScrollView style={{ flex: 1, width: "100%" }}>
               <View style={{ paddingTop: 20, marginHorizontal: 10 }}>
+                <Text style={styles.titleText}>Your Shop(s)</Text>
                 {customerData.map((item) => {
                   return (
                     <View
@@ -176,5 +177,11 @@ const styles = StyleSheet.create({
     // alignItems: "center",
 
     // backgroundColor: primaryColor,
+  },
+  titleText: {
+    fontSize: getScreenHeight() * 0.03,
+    padding: 10,
+    fontWeight: "bold",
+    color: "white",
   },
 });
