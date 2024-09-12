@@ -1,17 +1,8 @@
 import React from "react";
-import { SignedIn, SignedOut, useUser, useClerk } from "@clerk/clerk-expo";
-import { Link } from "expo-router";
-import { Text, View, Button, Platform, SafeAreaView } from "react-native";
-import {
-  fourthColor,
-  primaryColor,
-  secondaryColor,
-  thirdColor,
-} from "../util/color";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { LinearGradient } from "expo-linear-gradient";
-import { getScreenHeight, getScreenWidth } from "../util/dimensions";
+import { SignedOut, useUser } from "@clerk/clerk-expo";
+import { View, SafeAreaView, Text } from "react-native";
 import { BigButton } from "@/components/BigButton";
+import { getScreenHeight } from "../util/dimensions";
 export default function Page() {
   const { user } = useUser();
 
@@ -28,7 +19,13 @@ export default function Page() {
       }}
     >
       <SignedOut>
-        <View style={{ flex: 6 }}></View>
+        <View
+          style={{ flex: 6, justifyContent: "center", alignItems: "center" }}
+        >
+          <Text style={{ fontSize: getScreenHeight() * 0.05, color: "white" }}>
+            BLASTA
+          </Text>
+        </View>
         <View
           style={{
             flex: 1,
