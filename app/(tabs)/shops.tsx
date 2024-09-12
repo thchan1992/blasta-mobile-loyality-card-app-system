@@ -42,11 +42,31 @@ export default function Page() {
             _id: "66d2f91fab7980fde2f0d666",
             businessId: {
               _id: "66d2f6cbab7980fde2f0d650",
-              logo: "https://gusto-ts.s3.eu-west-2.amazonaws.com/1725520776500-Screenshot 2024-08-27 at 19.22.32.png",
+              logo: "https://i.imgur.com/rHa6UcT.png",
               loyaltyProgram: 10,
-              name: "asjdlkjsakldjas",
+              name: "Lomions",
             },
             count: 1,
+          },
+          {
+            _id: "66d2f91fab7980fde2f0d667",
+            businessId: {
+              _id: "66d2f6cbab7980fde2f0d657",
+              logo: "https://i.imgur.com/rkjrusa.png",
+              loyaltyProgram: 5,
+              name: "Compiny",
+            },
+            count: 15,
+          },
+          {
+            _id: "66d2f91fab7980fde2f0d668",
+            businessId: {
+              _id: "66d2f6cbab7980fde2f0d658",
+              logo: "https://i.imgur.com/SEXv4Jd.png",
+              loyaltyProgram: 10,
+              name: "Big Business",
+            },
+            count: 24,
           },
         ];
 
@@ -77,7 +97,7 @@ export default function Page() {
                     <View
                       style={{
                         padding: 5,
-                        flex: 1,
+                        flex: 2,
                         margin: 5,
                         backgroundColor: secondaryColor,
                         borderRadius: 10,
@@ -92,25 +112,39 @@ export default function Page() {
                       <View
                         style={{
                           padding: 10,
+
+                          flex: 1,
                         }}
                       >
-                        <Text>
-                          <Text style={{ fontWeight: "bold" }}>Name:</Text>{" "}
+                        <Text
+                          style={{
+                            fontWeight: "bold",
+                            fontSize: getScreenHeight() * 0.03,
+                            flexWrap: "wrap",
+                          }}
+                        >
                           {item.businessId.name}
                         </Text>
-                        <Text>
-                          <Text style={{ fontWeight: "bold" }}>Count:</Text>{" "}
-                          {item.count}
+
+                        <Text
+                          style={{
+                            fontWeight: "bold",
+                            color: "black",
+                            paddingTop: 10,
+                          }}
+                        >
+                          {item.count} Stamp(s)
                         </Text>
-                        <Text>
-                          <Text style={{ fontWeight: "bold" }}>Reward(s):</Text>{" "}
+
+                        <Text style={{ fontWeight: "bold", paddingTop: 3 }}>
+                          Available Reward(s):{" "}
                           {Math.round(
                             item.count / item.businessId.loyaltyProgram
                           ) > 0
                             ? Math.round(
                                 item.count / item.businessId.loyaltyProgram
                               )
-                            : "No reward"}
+                            : "0"}
                         </Text>
                       </View>
                       <View
@@ -124,8 +158,9 @@ export default function Page() {
                         <Image
                           style={{
                             flex: 1,
-                            width: "100%",
+                            width: getScreenHeight() * 0.18,
                             backgroundColor: "white",
+                            borderRadius: 20,
                           }}
                           source={item.businessId.logo}
                           placeholder={{ blurhash }}

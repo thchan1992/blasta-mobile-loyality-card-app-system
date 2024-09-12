@@ -12,6 +12,7 @@ import {
   secondaryColor,
   thirdColor,
 } from "../util/color";
+import { getScreenHeight } from "../util/dimensions";
 
 export default function Page() {
   const { user } = useUser();
@@ -48,6 +49,9 @@ export default function Page() {
         style={styles.container}
       > */}
       <SignedIn>
+        <Text style={{ fontSize: getScreenHeight() * 0.05, color: "white" }}>
+          BLASTA
+        </Text>
         {!isLoading && qrCodeValue ? (
           <View>
             <View style={styles.title}>
