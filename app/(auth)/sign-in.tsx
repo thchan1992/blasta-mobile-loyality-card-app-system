@@ -8,6 +8,7 @@ import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { BigButton } from "@/components/BigButton";
 import { PrimaryTextInput } from "@/components/PrimaryTextInput";
+import { useWarning } from "@/hooks/useWarning";
 
 export default function Page() {
   const { signIn, setActive, isLoaded } = useSignIn();
@@ -15,8 +16,8 @@ export default function Page() {
 
   const [emailAddress, setEmailAddress] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [warning, setWarning] = useState<string>("");
 
+  const { warning, setWarning } = useWarning();
   const onSignInPress = React.useCallback(async () => {
     if (!isLoaded) {
       return;
@@ -77,9 +78,7 @@ export default function Page() {
       <View
         style={{
           width: "100%",
-
           flex: 9,
-          // justifyContent: "center",
           alignItems: "flex-start",
         }}
       >
