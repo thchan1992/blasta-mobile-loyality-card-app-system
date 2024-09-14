@@ -1,39 +1,27 @@
 import * as React from "react";
-import {
-  TextInput,
-  Button,
-  View,
-  TouchableOpacity,
-  Text,
-  Image,
-  SafeAreaView,
-  StyleSheet,
-} from "react-native";
+import { View, Text, SafeAreaView } from "react-native";
 import { useSignUp } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
-import { FormContainer } from "@/components/FormContainer";
-import { getScreenHeight, getScreenWidth } from "../util/dimensions";
-import { LinearGradient } from "expo-linear-gradient";
-import {
-  fourthColor,
-  primaryColor,
-  secondaryColor,
-  thirdColor,
-} from "../util/color";
 import { PrimaryTextInput } from "@/components/PrimaryTextInput";
 import { BigButton } from "@/components/BigButton";
-import { useWarning } from "@/hooks/useWarning";
+import { sharedStyles } from "../util/styles";
+import { BackButtonBar } from "@/components/BackButtonBar";
+import { useAuthForm } from "@/hooks/useAuthForm";
 
 export default function SignUpScreen() {
   const { isLoaded, signUp, setActive } = useSignUp();
   const router = useRouter();
-
-  const [emailAddress, setEmailAddress] = React.useState("");
-  const [password, setPassword] = React.useState("");
   const [pendingVerification, setPendingVerification] = React.useState(false);
   const [code, setCode] = React.useState("");
-  // const [warning, setWarning] = React.useState<string>("");
-  const { warning, setWarning } = useWarning();
+
+  const {
+    emailAddress,
+    setEmailAddress,
+    password,
+    setPassword,
+    warning,
+    setWarning,
+  } = useAuthForm();
 
   const onSignUpPress = async () => {
     if (!isLoaded) {
@@ -84,50 +72,13 @@ export default function SignUpScreen() {
   };
 
   return (
-    <SafeAreaView
-      style={{
-        alignItems: "center",
-        flex: 1,
-        borderWidth: 1,
-        width: "100%",
-        backgroundColor: "black",
-      }}
-    >
-      {/* <FormContainer
-        child={ */}
-      <View
-        style={{
-          flex: 1,
-          borderBottomWidth: 2,
-          width: "100%",
-          justifyContent: "center",
-        }}
-      >
-        <TouchableOpacity
-          onPress={() => {
-            router.back();
-          }}
-        >
-          <Image
-            style={{
-              width: getScreenWidth() * 0.1,
-              height: getScreenHeight() * 0.1,
-            }}
-            source={require("@/assets/images/chevron-left.png")}
-          />
-        </TouchableOpacity>
-      </View>
+    <SafeAreaView style={sharedStyles.mainContainer}>
+      <BackButtonBar />
       {!pendingVerification && (
         <>
-          <View
-            style={{
-              width: "100%",
-              flex: 9,
-              alignItems: "flex-start",
-            }}
-          >
-            <Text style={styles.titleText}>Create an Account</Text>
-            <Text style={styles.text}>
+          <View style={sharedStyles.bodyContainer}>
+            <Text style={sharedStyles.titleText}>Create an Account</Text>
+            <Text style={sharedStyles.descText}>
               Enter your email to verify your account
             </Text>
             <PrimaryTextInput
@@ -144,34 +95,18 @@ export default function SignUpScreen() {
               placeholder="Password"
               isPassword={true}
             />
-            <Text style={styles.warningText}>{warning}</Text>
+            <Text style={sharedStyles.warningText}>{warning}</Text>
           </View>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-              margin: 10,
-            }}
-          >
+          <View style={sharedStyles.bottomContainer}>
             <BigButton title={"Sign up"} onPress={onSignUpPress} />
           </View>
         </>
       )}
       {pendingVerification && (
         <>
-          <View
-            style={{
-              width: "100%",
-              // width: getScreenWidth() * 0.8,
-              // height: getScreenHeight() * 0.5,
-              flex: 9,
-              // justifyContent: "center",
-              alignItems: "flex-start",
-            }}
-          >
-            <Text style={styles.titleText}>Confirm your email</Text>
-            <Text style={styles.text}>
+          <View style={sharedStyles.bodyContainer}>
+            <Text style={sharedStyles.titleText}>Confirm your email</Text>
+            <Text style={sharedStyles.descText}>
               We sent a 6 digits code to your email.
             </Text>
             <PrimaryTextInput
@@ -182,54 +117,13 @@ export default function SignUpScreen() {
               placeholder="Code..."
               customStyle={{ textAlign: "center" }}
             />
-            <Text style={styles.warningText}>{warning}</Text>
-
-            {/* <Button title="Verify Email" onPress={onPressVerify} /> */}
+            <Text style={sharedStyles.warningText}>{warning}</Text>
           </View>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-              margin: 10,
-            }}
-          >
-            {/* <TouchableOpacity
-              onPress={onPressVerify}
-              style={{
-                borderWidth: 1,
-                width: getScreenWidth() * 0.9,
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: fourthColor,
-                borderRadius: 40,
-                height: getScreenHeight() * 0.08,
-              }}
-            >
-              <Text>Verify Email</Text>
-            </TouchableOpacity> */}
+          <View style={sharedStyles.bottomContainer}>
             <BigButton title={"Verify email"} onPress={onPressVerify} />
           </View>
         </>
       )}
-
-      {/* }
-      /> */}
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  titleText: {
-    fontSize: getScreenHeight() * 0.03,
-    padding: 10,
-    fontWeight: "bold",
-    color: "white",
-  },
-  text: {
-    fontSize: getScreenHeight() * 0.02,
-    paddingLeft: 10,
-    color: "white",
-  },
-  warningText: { color: "red", paddingLeft: 15 },
-});

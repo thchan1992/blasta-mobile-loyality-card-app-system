@@ -6,9 +6,7 @@ import { sharedStyles } from "../util/styles";
 export default function Registration() {
   return (
     <SafeAreaView style={sharedStyles.onBoardingContainer}>
-      <View
-        style={{ flex: 6, justifyContent: "center", alignItems: "center" }}
-      ></View>
+      <View style={sharedStyles.onBoardingBodyContainer}></View>
       <View style={sharedStyles.bottomContainer}>
         <BigButton link={"/sign-up"} title={"Sign up"} />
         <BigButton link={"/sign-in"} title={"Sign in"} customColor="black" />
