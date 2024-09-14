@@ -1,39 +1,16 @@
 import React from "react";
-import { SignedOut, useUser } from "@clerk/clerk-expo";
+import { SignedOut } from "@clerk/clerk-expo";
 import { View, SafeAreaView, Text } from "react-native";
 import { BigButton } from "@/components/BigButton";
-import { getScreenHeight } from "../util/dimensions";
+import { sharedStyles } from "@/app/util/styles";
 export default function Page() {
-  const { user } = useUser();
-
   return (
-    <SafeAreaView
-      // colors={["black", "white"]}
-      style={{
-        backgroundColor: "black",
-        justifyContent: "center",
-        alignItems: "center",
-        flex: 1,
-        borderWidth: 1,
-        width: "100%",
-      }}
-    >
+    <SafeAreaView style={sharedStyles.onBoardingContainer}>
       <SignedOut>
-        <View
-          style={{ flex: 6, justifyContent: "center", alignItems: "center" }}
-        >
-          <Text style={{ fontSize: getScreenHeight() * 0.05, color: "white" }}>
-            BLASTA
-          </Text>
+        <View style={sharedStyles.bodyContainer}>
+          <Text style={sharedStyles.title}>BLASTA</Text>
         </View>
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-            margin: 10,
-          }}
-        >
+        <View style={sharedStyles.bottomContainer}>
           <BigButton link={"/registration"} title={"Get Started"} />
         </View>
       </SignedOut>
