@@ -5,9 +5,11 @@ import axios from "axios";
 import { fourthColor } from "../util/color";
 import { getScreenHeight } from "../util/dimensions";
 import { ShopItem } from "@/components/ShopItem";
+import { CustomerData } from "../../types/types";
+
 export default function Page() {
   const { getToken } = useAuth();
-  const [customerData, setCustomerData] = useState<any[]>([]);
+  const [customerData, setCustomerData] = useState<CustomerData[]>([]);
   const [isLoading, setIsLoading] = useState<Boolean>(true);
 
   useEffect(() => {
@@ -22,6 +24,8 @@ export default function Page() {
             },
           }
         );
+
+        console.log(response.data.data.stamps, "re.stamps");
 
         setCustomerData(response.data.data.stamps);
       } catch (error) {

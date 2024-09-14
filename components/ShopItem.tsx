@@ -1,5 +1,6 @@
 import { secondaryColor } from "@/app/util/color";
 import { getScreenHeight } from "@/app/util/dimensions";
+import { CustomerData } from "@/types/types";
 import { Image } from "expo-image";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
