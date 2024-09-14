@@ -6,6 +6,7 @@ export const useAuthForm = () => {
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
   const { warning, setWarning } = useWarning();
+  const [code, setCode] = useState("");
 
   return {
     emailAddress,
@@ -14,5 +15,7 @@ export const useAuthForm = () => {
     setPassword,
     warning,
     setWarning,
+    code,
+    setCode,
   };
 };

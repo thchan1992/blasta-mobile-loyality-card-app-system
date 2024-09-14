@@ -1,30 +1,27 @@
-import {
-  View,
-  StyleSheet,
-  TextInput,
-  Button,
-  SafeAreaView,
-  Text,
-} from "react-native";
+import { View, SafeAreaView, Text } from "react-native";
 import React, { useState } from "react";
-import { Stack } from "expo-router";
 import { useSignIn } from "@clerk/clerk-expo";
-import { LinearGradient } from "expo-linear-gradient";
-import { primaryColor, secondaryColor } from "../util/color";
 import { BackButtonBar } from "@/components/BackButtonBar";
 import { PrimaryTextInput } from "@/components/PrimaryTextInput";
 import { BigButton } from "@/components/BigButton";
-import { getScreenHeight } from "../util/dimensions";
-import { useWarning } from "@/hooks/useWarning";
+import { useAuthForm } from "@/hooks/useAuthForm";
+import { sharedStyles } from "../util/styles";
 
 const PwReset = () => {
-  const [emailAddress, setEmailAddress] = useState("");
-  const [password, setPassword] = useState("");
-  const [code, setCode] = useState("");
   const [successfulCreation, setSuccessfulCreation] = useState(false);
   const { signIn, setActive } = useSignIn();
 
-  const { warning, setWarning } = useWarning();
+  const {
+    emailAddress,
+    setEmailAddress,
+    password,
+    setPassword,
+    warning,
+    setWarning,
+    code,
+    setCode,
+  } = useAuthForm();
+
   // Request a passowrd reset code by email
   const onRequestReset = async () => {
     try {
@@ -60,15 +57,13 @@ const PwReset = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      {/* <Stack.Screen options={{ headerBackVisible: !successfulCreation }} /> */}
-
+    <SafeAreaView style={sharedStyles.mainContainer}>
       {!successfulCreation && (
         <>
           <BackButtonBar />
-          <View style={styles.bodyContainer}>
-            <Text style={styles.titleText}>Reset your Password</Text>
-            <Text style={styles.text}>Enter your email to start</Text>
+          <View style={sharedStyles.bodyContainer}>
+            <Text style={sharedStyles.titleText}>Reset your Password</Text>
+            <Text style={sharedStyles.descText}>Enter your email to start</Text>
             <PrimaryTextInput
               title={"Email"}
               value={emailAddress}
@@ -76,9 +71,9 @@ const PwReset = () => {
               placeholder="Email..."
               isPassword={false}
             />
-            <Text style={styles.warningText}>{warning}</Text>
+            <Text style={sharedStyles.warningText}>{warning}</Text>
           </View>
-          <View style={styles.bottomContainer}>
+          <View style={sharedStyles.bottomContainer}>
             <BigButton title="Set Reset Email" onPress={onRequestReset} />
           </View>
         </>
@@ -87,7 +82,7 @@ const PwReset = () => {
       {successfulCreation && (
         <>
           <BackButtonBar />
-          <View style={styles.bodyContainer}>
+          <View style={sharedStyles.bodyContainer}>
             <PrimaryTextInput
               title={"Code"}
               value={code}
@@ -104,7 +99,7 @@ const PwReset = () => {
               isPassword={true}
             />
           </View>
-          <View style={styles.bottomContainer}>
+          <View style={sharedStyles.bottomContainer}>
             <BigButton title="Set new Password" onPress={onReset} />
           </View>
         </>
@@ -112,37 +107,5 @@ const PwReset = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: "black",
-    alignItems: "center",
-  },
-  bodyContainer: {
-    width: "100%",
-    flex: 9,
-    alignItems: "flex-start",
-  },
-  bottomContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    margin: 10,
-  },
-  titleText: {
-    fontSize: getScreenHeight() * 0.03,
-    padding: 10,
-    fontWeight: "bold",
-    color: "white",
-  },
-  text: {
-    fontSize: getScreenHeight() * 0.02,
-    paddingLeft: 10,
-    color: "white",
-  },
-  warningText: { color: "red", paddingLeft: 15 },
-});
 
 export default PwReset;

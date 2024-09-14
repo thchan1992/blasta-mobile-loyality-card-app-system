@@ -12,7 +12,6 @@ export default function SignUpScreen() {
   const { isLoaded, signUp, setActive } = useSignUp();
   const router = useRouter();
   const [pendingVerification, setPendingVerification] = React.useState(false);
-  const [code, setCode] = React.useState("");
 
   const {
     emailAddress,
@@ -21,6 +20,8 @@ export default function SignUpScreen() {
     setPassword,
     warning,
     setWarning,
+    code,
+    setCode,
   } = useAuthForm();
 
   const onSignUpPress = async () => {
