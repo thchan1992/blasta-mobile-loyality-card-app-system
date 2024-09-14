@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { SignedIn, SignedOut, useAuth, useUser } from "@clerk/clerk-expo";
-import { Link } from "expo-router";
-import { LinearGradient } from "expo-linear-gradient";
+import { SignedIn, useUser } from "@clerk/clerk-expo";
 import { Text, View, StyleSheet, SafeAreaView } from "react-native";
 import QRCode from "react-native-qrcode-svg";
 import * as SecureStore from "expo-secure-store";
-import {
-  fifthColor,
-  fourthColor,
-  primaryColor,
-  secondaryColor,
-  thirdColor,
-} from "../util/color";
+import { fourthColor } from "../util/color";
 import { getScreenHeight } from "../util/dimensions";
 
 export default function Page() {
@@ -44,14 +36,8 @@ export default function Page() {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* <LinearGradient
-        colors={[secondaryColor, primaryColor]}
-        style={styles.container}
-      > */}
       <SignedIn>
-        <Text style={{ fontSize: getScreenHeight() * 0.05, color: "white" }}>
-          BLASTA
-        </Text>
+        <Text style={styles.blasta}>BLASTA</Text>
         {!isLoading && qrCodeValue ? (
           <View>
             <View style={styles.title}>
@@ -73,6 +59,10 @@ export default function Page() {
 }
 
 const styles = StyleSheet.create({
+  blasta: {
+    fontSize: getScreenHeight() * 0.05,
+    color: "white",
+  },
   container: {
     flex: 1,
     justifyContent: "center",
