@@ -9,6 +9,7 @@ import { PrimaryTextInput } from "@/components/PrimaryTextInput";
 import { sharedStyles } from "../util/styles";
 import { BackButtonBar } from "@/components/BackButtonBar";
 import { useAuthForm } from "@/hooks/useAuthForm";
+import * as SecureStore from "expo-secure-store";
 
 export default function Page() {
   const { signIn, setActive, isLoaded } = useSignIn();
@@ -28,6 +29,7 @@ export default function Page() {
     }
 
     try {
+      await SecureStore.deleteItemAsync("userId");
       const signInAttempt = await signIn.create({
         identifier: emailAddress,
         password,
