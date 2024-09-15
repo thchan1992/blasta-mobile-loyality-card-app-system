@@ -11,7 +11,6 @@ import { useAuthForm } from "@/hooks/useAuthForm";
 export default function SignUpScreen() {
   const { isLoaded, signUp, setActive } = useSignUp();
   const router = useRouter();
-  const [pendingVerification, setPendingVerification] = React.useState(false);
 
   const {
     emailAddress,
@@ -19,58 +18,12 @@ export default function SignUpScreen() {
     password,
     setPassword,
     warning,
-    setWarning,
     code,
     setCode,
-  } = useAuthForm();
-
-  const onSignUpPress = async () => {
-    if (!isLoaded) {
-      return;
-    }
-
-    try {
-      await signUp.create({
-        emailAddress,
-        password,
-        unsafeMetadata: {
-          accountType: "customer",
-        },
-      });
-
-      await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
-      setWarning("");
-      setPendingVerification(true);
-    } catch (err: any) {
-      // See https://clerk.com/docs/custom-flows/error-handling
-      // for more info on error handling
-      // console.error(JSON.stringify(err, null, 2));
-      setWarning("Email has been taken.");
-    }
-  };
-
-  const onPressVerify = async () => {
-    if (!isLoaded) {
-      return;
-    }
-    try {
-      const completeSignUp = await signUp.attemptEmailAddressVerification({
-        code,
-      });
-
-      if (completeSignUp.status === "complete") {
-        await setActive({ session: completeSignUp.createdSessionId });
-        router.replace("/");
-      } else {
-        // console.error(JSON.stringify(completeSignUp, null, 2));
-      }
-    } catch (err: any) {
-      setWarning("Verification code is not correct.");
-      // See https://clerk.com/docs/custom-flows/error-handling
-      // for more info on error handling
-      // console.error(JSON.stringify(err, null, 2));
-    }
-  };
+    pendingVerification,
+    onSignUpPress,
+    onPressVerify,
+  } = useAuthForm({ isLoaded, signUp, setActive, router });
 
   return (
     <SafeAreaView style={sharedStyles.mainContainer}>

@@ -6,55 +6,23 @@ import { PrimaryTextInput } from "@/components/PrimaryTextInput";
 import { BigButton } from "@/components/BigButton";
 import { useAuthForm } from "@/hooks/useAuthForm";
 import { sharedStyles } from "../util/styles";
+import { useRouter } from "expo-router";
 
 const PwReset = () => {
-  const [successfulCreation, setSuccessfulCreation] = useState(false);
   const { signIn, setActive } = useSignIn();
-
+  const router = useRouter();
   const {
     emailAddress,
     setEmailAddress,
     password,
     setPassword,
     warning,
-    setWarning,
     code,
     setCode,
-  } = useAuthForm();
-
-  // Request a passowrd reset code by email
-  const onRequestReset = async () => {
-    try {
-      await signIn!.create({
-        strategy: "reset_password_email_code",
-        identifier: emailAddress,
-      });
-      setSuccessfulCreation(true);
-    } catch (err: any) {
-      // alert(err.errors[0].message);
-      setWarning("Email dose not exist");
-    }
-  };
-
-  // Reset the password with the code and the new password
-  const onReset = async () => {
-    setWarning("");
-    try {
-      const result = await signIn!.attemptFirstFactor({
-        strategy: "reset_password_email_code",
-        code,
-        password,
-      });
-      console.log(result);
-      alert("Password reset successfully");
-
-      // Set the user session active, which will log in the user automatically
-      await setActive!({ session: result.createdSessionId });
-    } catch (err: any) {
-      setWarning(err.errors[0].message);
-      // alert(err.errors[0].message);
-    }
-  };
+    successfulCreation,
+    onRequestReset,
+    onReset,
+  } = useAuthForm({ signIn, setActive, router });
 
   return (
     <SafeAreaView style={sharedStyles.mainContainer}>
@@ -98,6 +66,7 @@ const PwReset = () => {
               placeholder="New Password..."
               isPassword={true}
             />
+            <Text style={sharedStyles.warningText}>{warning}</Text>
           </View>
           <View style={sharedStyles.bottomContainer}>
             <BigButton title="Set new Password" onPress={onReset} />

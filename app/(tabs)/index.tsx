@@ -5,32 +5,34 @@ import QRCode from "react-native-qrcode-svg";
 import * as SecureStore from "expo-secure-store";
 import { fourthColor } from "../util/color";
 import { getScreenHeight } from "../util/dimensions";
+import { useIsLoading } from "@/hooks/useIsLoading";
 
 export default function Page() {
   const { user } = useUser();
   const [userId, setUserId] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { isLoading, setIsLoading } = useIsLoading();
 
   useEffect(() => {
-    async function getValue() {
-      try {
-        const result = await SecureStore.getItemAsync("userId");
-        if (result) {
-          //getting the userId from local storage
-          setUserId(result);
-        } else {
-          //setting the userId to local storage
-          await SecureStore.setItemAsync("userId", user!.id!);
-          setUserId(user!.id!);
-        }
-      } catch (error) {
-        console.error("Error fetching secure store value", error);
-        return false;
-      }
-    }
     getValue();
     setIsLoading(false);
   }, []);
+
+  async function getValue() {
+    try {
+      const result = await SecureStore.getItemAsync("userId");
+      if (result) {
+        //getting the userId from local storage
+        setUserId(result);
+      } else {
+        //setting the userId to local storage
+        await SecureStore.setItemAsync("userId", user!.id!);
+        setUserId(user!.id!);
+      }
+    } catch (error) {
+      console.error("Error fetching secure store value", error);
+      return false;
+    }
+  }
 
   const qrCodeValue = userId || (user ? user.id : "");
 

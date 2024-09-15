@@ -9,7 +9,6 @@ import { PrimaryTextInput } from "@/components/PrimaryTextInput";
 import { sharedStyles } from "../util/styles";
 import { BackButtonBar } from "@/components/BackButtonBar";
 import { useAuthForm } from "@/hooks/useAuthForm";
-import * as SecureStore from "expo-secure-store";
 
 export default function Page() {
   const { signIn, setActive, isLoaded } = useSignIn();
@@ -20,33 +19,8 @@ export default function Page() {
     password,
     setPassword,
     warning,
-    setWarning,
-  } = useAuthForm();
-
-  const onSignInPress = React.useCallback(async () => {
-    if (!isLoaded) {
-      return;
-    }
-
-    try {
-      await SecureStore.deleteItemAsync("userId");
-      const signInAttempt = await signIn.create({
-        identifier: emailAddress,
-        password,
-      });
-
-      if (signInAttempt.status === "complete") {
-        await setActive({ session: signInAttempt.createdSessionId });
-        router.replace("/");
-      } else {
-        // See https://clerk.com/docs/custom-flows/error-handling
-        // for more info on error handling
-        console.error(JSON.stringify(signInAttempt, null, 2));
-      }
-    } catch (err: any) {
-      setWarning("The email or password is not correct.");
-    }
-  }, [isLoaded, emailAddress, password]);
+    onSignInPress,
+  } = useAuthForm({ signIn, setActive, isLoaded, router });
 
   return (
     <SafeAreaView style={sharedStyles.mainContainer}>

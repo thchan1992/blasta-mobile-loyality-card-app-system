@@ -6,36 +6,35 @@ import { fourthColor } from "../util/color";
 import { getScreenHeight } from "../util/dimensions";
 import { ShopItem } from "@/components/ShopItem";
 import { CustomerData } from "../../types/types";
+import { useIsLoading } from "@/hooks/useIsLoading";
 
 export default function Page() {
   const { getToken } = useAuth();
   const [customerData, setCustomerData] = useState<CustomerData[]>([]);
-  const [isLoading, setIsLoading] = useState<Boolean>(true);
+  const { isLoading, setIsLoading } = useIsLoading();
 
   useEffect(() => {
-    const fetchCustomerData = async () => {
-      try {
-        const token = await getToken();
-        const response = await axios.get(
-          "https://blasto-red.vercel.app/api/customer/view",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        console.log(response.data.data.stamps, "re.stamps");
-
-        setCustomerData(response.data.data.stamps);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
     fetchCustomerData();
   }, []);
+
+  const fetchCustomerData = async () => {
+    try {
+      const token = await getToken();
+      const response = await axios.get(
+        "https://blasto-red.vercel.app/api/customer/view",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setCustomerData(response.data.data.stamps);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <View style={styles.container}>

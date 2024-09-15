@@ -5,7 +5,7 @@ import * as SecureStore from "expo-secure-store";
 
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { fifthColor, primaryColor } from "../util/color";
-import { sharedStyles } from "../util/styles";
+
 export default function Page() {
   const { user } = useUser();
   const { signOut } = useClerk();
