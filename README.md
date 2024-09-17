@@ -1,8 +1,10 @@
 # Blasta App
 
-<img src="./onboarding-screenshoot.png" alt="Blasto Banner" height="500"/>
-<img src="./qr-code-screenshoot.png" alt="Blasto Banner" height="500"/>
-<img src="./your-shop-screenshoot.png" alt="Blasto Banner" height="500"/>
+<p align="center">
+  <img src="./onboarding-screenshoot.png" alt="Onboarding Screenshot" height="500" style="margin-right: 10px;"/>
+  <img src="./qr-code-screenshoot.png" alt="QR Code Screenshot" height="500" style="margin-right: 10px;"/>
+  <img src="./your-shop-screenshoot.png" alt="Your Shop Screenshot" height="500"/>
+</p>
 
 ## Description
 
