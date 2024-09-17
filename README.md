@@ -1,50 +1,58 @@
-# Welcome to your Expo app 👋
+# Blasta App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+<img src="./onboarding-screenshot.png" alt="Blasto Banner" />
+<img src="./qr-code-screenshoot.png" alt="Blasto Banner" />
+<img src="./your-shop-screenshoot.png" alt="Blasto Banner" />
 
-## Get started
+## Description
 
-1. Install dependencies
+Blasta is a mobile application designed for customers to collect digital stamps and redeem rewards from various shops and businesses. It serves as the customer-facing component of the [Blasto](https://github.com/thchan1992/blasto) digital gift card system.
 
-   ```bash
+## Features
+
+- **Digital Stamp Collection**: Users can display a QR code to collect stamps from participating businesses.
+- **Reward Redemption**: Accumulated stamps can be redeemed for rewards directly through the app.
+- **Multi-Shop Support**: View stamps and rewards from different shops all in one place.
+- **Reward Tracking**: Keep track of available rewards from various shops.
+
+## Technology Stack
+
+- **Frontend**: Expo (React Native)
+- **Authentication**: Clerk
+
+## Installation
+
+To set up the project locally, follow these steps:
+
+1. Clone the repository
+
+   ```
+   git clone https://github.com/your-username/blasta-app.git
+   cd blasta-app
+   ```
+
+2. Install dependencies
+
+   ```
    npm install
    ```
 
-2. Start the app
+3. Set up environment variables (create a `.env` file in the root directory)
 
-   ```bash
-    npx expo start
+   ```
+   EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_publishable_key
    ```
 
-In the output, you'll find options to open the app in a
+4. Start the Expo development server
+   ```
+   npx expo start
+   ```
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## License
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+This project is licensed under the MIT License - see the LICENSE file for details.
+MIT License is a permissive license that allows for reuse within proprietary software provided all copies of the licensed software include a copy of the MIT License terms and the copyright notice.
 
-## Get a fresh project
+## Contact
 
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+For any inquiries or support, please contact Han at info@windyrecipe.com.
