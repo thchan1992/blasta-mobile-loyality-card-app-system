@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "blasta",
+    "name": "Loye",
     "slug": "blasta",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -13,13 +13,16 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.blasta.kurebio",
+      "buildNumber": "2"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.blasta.kurebio"
     },
     "web": {
       "bundler": "metro",
@@ -29,6 +32,15 @@
     "plugins": ["expo-router", "expo-secure-store"],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b51413f1-a275-4a4f-8bf4-1cfa4a7dcf8e"
+      }
+    },
+    "runtimeVersion": "1.0.0",
+    "updates": {
+      "url": "https://u.expo.dev/b51413f1-a275-4a4f-8bf4-1cfa4a7dcf8e"
     }
   }
 }

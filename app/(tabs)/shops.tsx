@@ -21,7 +21,7 @@ export default function Page() {
     try {
       const token = await getToken();
       const response = await axios.get(
-        "https://blasto-red.vercel.app/api/customer/view",
+        "https://loy.kuberio.com/api/customer/view",
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -28,7 +28,7 @@ const tokenCache = {
   },
 };
 
-const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
+const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
 if (!publishableKey) {
   throw new Error(
@@ -39,7 +39,7 @@ if (!publishableKey) {
 function RootLayoutNav() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
+      <ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey!}>
         <ClerkLoaded>
           <Slot />
         </ClerkLoaded>
