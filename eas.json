@@ -24,6 +24,11 @@
       "ios": {
         "simulator": true
       }
+    },
+    "test-andriod-device": {
+      "android": {
+        "buildType": "apk"
+      }
     }
   },
   "submit": {
